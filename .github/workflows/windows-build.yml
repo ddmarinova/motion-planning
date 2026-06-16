@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: windows-latest
@@ -25,7 +28,7 @@ jobs:
 
       - name: Build EXE
         run: |
-          python -m PyInstaller --clean motion-planning.spec
+          python -m PyInstaller --clean --onefile --windowed --name motion-planning main.py
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
